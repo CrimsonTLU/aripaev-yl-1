@@ -1,36 +1,27 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Äripäev Kodune Ülesanne 1 - Palgatrendide analüüsi rakendus
 
-## Getting Started
+### Autor: Christian Hindremäe
 
-First, run the development server:
+### Kirjeldus
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+See rakendus võimaldab kasutajal saada infot soovitud valdkonna palgatrendide kohta viimaste aastate jooksul ning saada ka nõu ja prognoosi tulevikuks. Rakendus kasutab andmete saamiseks Statistikaameti rakendusliidest ning analüüsi koostamiseks OpenAI rakendusliidest.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Funktsionaalsused
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+* Kasutaja saab valida soovitud valdkonna/tegevusala eeltäidetud menüüst
+* Rakendus pärib andmed valitud valdkonna/tegevusala kohta stat.ee API-st
+* Rakendus pärib palgatrendide kohta analüüsi GPT-4o mudeli käest läbi OpenAI API
+* Rakendus kuvab andmed visualiseeritud graafikuna
+* Rakendus kuvab ChatGPT analüüsi tekstina graafiku all
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Tehniline kirjeldus
 
-## Learn More
+Rakendus on üles ehitatud React.js ja Next.js raamistike abil. Rõhku on pandud SOC (Separation of Concerns) printsiibi järgimisele ning Next.js parimatele praktikatele. Kasutusel on ka TypeScript. Tagarakenduse pooles on kirjeldatud väliste rakendusliideste loogika kausta "lib" all, ning neid realiseerivad teenused kausta "services" all. Eesrakenduse poolel on kirjeldatud rakenduse algpunkt, kirjeldatud marsruudid tagarakendusest andmete pärimiseks, ning kasutades SSR lähenemist kuvatakse kasutajale kasutajaliides eelnevalt allalaetud andmetega. Kasutajaliides on üles ehitatud Material UI teegi abil.
 
-To learn more about Next.js, take a look at the following resources:
+### Käivitamine
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Lae alla antud repositoorium (git clone)
+2. Olles rakenduse kaustas (cd aripaev-yl-1) lae alla vajaminevad NPM paketid (npm install)
+3. Veendu .env faili olemasolus rakenduse juurkaustas (sisaldab OpenAI API võtit)
+4. Käivita rakendus (npm run dev)
+5. Rakendus on kasutatav lokaalsel aadressil http://localhost:3000
