@@ -16,7 +16,7 @@ See rakendus võimaldab kasutajal saada infot soovitud valdkonna palgatrendide k
 
 ### Tehniline kirjeldus
 
-Rakendus on üles ehitatud React.js ja Next.js raamistike abil. Rõhku on pandud SOC (Separation of Concerns) printsiibi järgimisele ning Next.js parimatele praktikatele. Kasutusel on ka TypeScript. Tagarakenduse pooles on kirjeldatud väliste rakendusliideste loogika kausta "lib" all, ning neid realiseerivad teenused kausta "services" all. Eesrakenduse poolel on kirjeldatud rakenduse algpunkt, kirjeldatud marsruudid tagarakendusest andmete pärimiseks, ning kasutades SSR lähenemist kuvatakse kasutajale kasutajaliides eelnevalt allalaetud andmetega. Kasutajaliides on üles ehitatud Material UI teegi abil.
+Rakendus on üles ehitatud React.js ja Next.js raamistike abil. Rõhku on pandud SOC (Separation of Concerns) printsiibi järgimisele ning Next.js parimatele praktikatele. Kasutusel on ka TypeScript. Tagarakenduse pooles on kirjeldatud väliste rakendusliideste kasutamise loogika kausta "lib" all, ning neid realiseerivad teenused kausta "services" all. Eesrakenduse poolel on kirjeldatud rakenduse algpunkt, kirjeldatud marsruudid tagarakendusest andmete pärimiseks, ning kasutades SSR lähenemist kuvatakse kasutajale kasutajaliides eelnevalt allalaetud andmetega. Kasutajaliides on üles ehitatud Material UI teegi abil.
 
 ### Käivitamine
 
