@@ -11,7 +11,7 @@ export async function generateSummary(prompt: string) {
       messages: [
         {
           role: "system",
-          content: "You are an expert on salary trends in Estonia.",
+          content: "Sa oled ekspert Eesti palgatrendide osas.",
         },
         {
           role: "user",

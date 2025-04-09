@@ -11,7 +11,7 @@ import QueryForm, {
 import ResultDisplay from "../components/result-display";
 import MainLayout from "../layout/main-layout";
 
-import { SalaryData, Variable } from "../types/statisticsTypes";
+import { SalaryData, Variable } from "../types/statistics-types";
 
 interface HomeProps {
   options: QueryFormOptions;
@@ -21,6 +21,7 @@ export default function Home({ options }: HomeProps) {
   const [salaryData, setSalaryData] = useState<SalaryData | null>(null);
   const [summary, setSummary] = useState<string>("");
   const [loading, setLoading] = useState(false);
+  const [fieldName, setFieldName] = useState<string>("");
 
   const handleQuerySubmit = async (values: QueryValues) => {
     setLoading(true);
@@ -68,6 +69,7 @@ export default function Home({ options }: HomeProps) {
         salaryRes.data.dimension["Tegevusala"].category.label[
           values.tegevusala
         ];
+      setFieldName(fieldLabel);
 
       const prompt = `
 Siin on palgaandmed tegevusala "${fieldLabel}" kohta viimase 4 aasta jooksul:
@@ -79,7 +81,7 @@ Koosta lihtsas keeles kokkuvõte, mis sisaldab:
 2. Prognoos järgmisteks aastateks.
 3. Soovitused, kuidas selles valdkonnas võiks palka suurendada (nt oskused või kvalifikatsioonid).
 
-Vastus peaks olema arusaadav tavainimesele.
+Vastus peaks olema arusaadav tavainimesele. Vasta ainult loetletud punktidele ühe lõiguna, ära lisa midagi enne ega pärast.
 `;
 
       try {
@@ -90,7 +92,8 @@ Vastus peaks olema arusaadav tavainimesele.
         );
       } catch (summaryError) {
         alert(`Failed to get ChatGPT summary: ${summaryError}`);
-        setSummary("Kokkuvõtet ei õnnestunud saada");
+        setSummary(`
+Kokkuvõtet ei õnnestunud saada. Näidiskokkuvõte: Palk tegevusalal "Taime- ja loomakasvatus, jahindus ja neid teenindavad tegevusalad" on viimase nelja aasta jooksul pidevalt tõusnud: 2021. aastal oli keskmine brutopalk 1154 €, 2022. aastal 1293 €, 2023. aastal 1422 € ning 2024. aastal juba 1525 €, mis näitab selget tõusutrendi. Kui see kasv jätkub sarnases tempos (umbes 100 € aastas), võiks 2025. aastal oodata keskmiseks palgaks umbes 1625 € ja 2026. aastaks ligikaudu 1725 €. Palgatõusuks selles valdkonnas tasub arendada erialaseid teadmisi näiteks põllumajandustehnoloogia, ökopõllumajanduse või loomade tervise vallas ning täiendada end kaasaegsete töövõtete ja masinate kasutamises – näiteks õppida traktorite või teiste põllumajandusmasinate juhtimist, taimekaitse alaseid teadmisi või loomade aretustehnikaid, kuna need suurendavad töötaja väärtust tööandja silmis.`);
       }
     } catch (error) {
       console.error("Fetch error:", error);
@@ -108,7 +111,11 @@ Vastus peaks olema arusaadav tavainimesele.
       {loading ? (
         <p>Laetakse tulemusi...</p>
       ) : (
-        <ResultDisplay salaryData={salaryData} summary={summary} />
+        <ResultDisplay
+          salaryData={salaryData}
+          summary={summary}
+          field={fieldName}
+        />
       )}
     </MainLayout>
   );

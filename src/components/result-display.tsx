@@ -1,6 +1,6 @@
 import { Typography, Paper } from "@mui/material";
 import { FC } from "react";
-import { SalaryData } from "../types/statisticsTypes";
+import { SalaryData } from "../types/statistics-types";
 import {
   LineChart,
   Line,
@@ -14,9 +14,10 @@ import {
 interface ResultDisplayProps {
   salaryData: SalaryData | null;
   summary: string;
+  field: string;
 }
 
-const ResultDisplay: FC<ResultDisplayProps> = ({ salaryData, summary }) => {
+const ResultDisplay: FC<ResultDisplayProps> = ({ salaryData, summary, field }) => {
   if (!salaryData) return null;
 
   const values = salaryData.value;
@@ -35,7 +36,7 @@ const ResultDisplay: FC<ResultDisplayProps> = ({ salaryData, summary }) => {
   return (
     <Paper sx={{ p: 3, mt: 4 }}>
       <Typography variant="h6" gutterBottom>
-        Palgatrend
+        Palgatrend - {field}
       </Typography>
 
       <ResponsiveContainer width="100%" height={300}>
@@ -51,7 +52,7 @@ const ResultDisplay: FC<ResultDisplayProps> = ({ salaryData, summary }) => {
       <Typography variant="h6" sx={{ mt: 4 }}>
         Kokkuvõte
       </Typography>
-      <Typography variant="body2" color="text.secondary">
+      <Typography variant="body1">
         {summary}
       </Typography>
     </Paper>
